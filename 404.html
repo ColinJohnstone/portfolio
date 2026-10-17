@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found — Colin Johnstone</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{color-scheme:light dark;--bg:#f5f5f2;--ink:#0c0d0c;--mute:#62645d;--line:rgba(12,13,12,.2)}
+  @media (prefers-color-scheme:dark){:root{--bg:#0a0b0a;--ink:#f1f1ed;--mute:#8d8f88;--line:rgba(241,241,237,.24)}}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100svh;display:grid;place-content:center;gap:20px;padding:24px;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  p.l{margin:0;font:500 .75rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  h1{margin:0;font-size:clamp(3.4rem,14vw,9rem);line-height:.9;letter-spacing:-.05em;font-weight:650}
+  p{margin:0;color:var(--mute);max-width:40ch}
+  a.b{justify-self:start;margin-top:8px;padding:.85em 1.4em;border-radius:99px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:550;font-size:.94rem}
+</style>
+</head>
+<body>
+<p class="l">404</p>
+<h1>Not found</h1>
+<p>That page doesn't exist. The portfolio's home page has everything.</p>
+<a class="b" id="home" href="/">Back to the portfolio</a>
+<script>
+  /* GitHub project pages live under /<repo>/, so build the home link from the host */
+  (function(){var s=location.hostname.slice(-10)==='github.io'?location.pathname.split('/')[1]:'';
+  document.getElementById('home').href=s?'/'+s+'/':'/';})();
+</script>
+</body>
+</html>
