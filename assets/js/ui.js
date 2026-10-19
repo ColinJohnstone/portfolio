@@ -1,5 +1,5 @@
-/* ui.js — theme, header, reveals, counters, hero grid, parallax, work-list preview,
-   scroll-spy and timeline filters. Vanilla, no dependencies.
+/* ui.js — theme, header, reveals, counters, hero grid, scroll-spy and timeline filters.
+   Vanilla, no dependencies.
    Without JS the page is fully readable (see the html:not(.js) rules in the CSS). */
 (() => {
   'use strict';
@@ -75,7 +75,6 @@
     lastY = y;
     spy();
     timelineProgress();
-    parallax();
     ticking = false;
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -159,54 +158,16 @@
     }, { passive: true });
   }
 
-  /* ---------- gentle scroll parallax on [data-parallax="speed"] ---------- */
-  const pxEls = $$('[data-parallax]');
-  function parallax() {
-    if (reduce() || !pxEls.length) return;
-    pxEls.forEach((el) => {
-      const r = el.parentElement.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > innerHeight + 200) return;
-      const off = (r.top + r.height / 2 - innerHeight / 2) * parseFloat(el.dataset.parallax);
-      el.style.transform = `translate3d(0,${off.toFixed(1)}px,0)`;
-    });
-  }
-
-  /* ---------- work list: a preview image follows the pointer ---------- */
-  const rows = $$('.work-row[data-preview]');
-  if (rows.length && fine.matches) {
-    const pv = document.createElement('div');
-    pv.className = 'work-preview'; pv.setAttribute('aria-hidden', 'true');
-    const pimg = document.createElement('img'); pimg.alt = ''; pv.appendChild(pimg);
-    document.body.appendChild(pv);
-    let x = 0, y = 0, tx = 0, ty = 0, vx = 0, on = false, raf = 0;
-    const loop = () => {
-      const nx = x + (tx - x) * 0.16, ny = y + (ty - y) * 0.16;
-      vx = clamp((nx - x) * 0.6, -10, 10); x = nx; y = ny;
-      pv.style.transform = `translate3d(${(x + 24).toFixed(1)}px,${(y - 100).toFixed(1)}px,0) rotate(${(vx * 0.4).toFixed(2)}deg)`;
-      raf = on || Math.abs(tx - x) > 0.5 ? requestAnimationFrame(loop) : 0;
-    };
-    rows.forEach((row) => {
-      row.addEventListener('pointerenter', (e) => {
-        pimg.src = row.dataset.preview;
-        if (!on) { x = tx = e.clientX; y = ty = e.clientY; }
-        on = true; pv.classList.add('is-on');
-        if (!raf) raf = requestAnimationFrame(loop);
-      });
-      row.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; });
-      row.addEventListener('pointerleave', () => { on = false; pv.classList.remove('is-on'); });
-    });
-  }
-
   /* ---------- nav scroll-spy (home) ---------- */
   const links = $$('[data-nav] a');
-  const spyMap = [['work', '#work'], ['pipe-stats', '#pipe-stats'], ['private', '#fuel-quest'], ['private', '#training-dashboard'], ['work', '#phish-or-legit'], ['work', '#sector-2026']]
+  const spyMap = [['security', '#security'], ['piping', '#piping'], ['projects', '#projects']]
     .map(([k, s]) => [k, $(s)]).filter(([, el]) => el);
   function spy() {
     if (!spyMap.length) return;
     const mid = innerHeight * 0.4;
     let key = null;
     spyMap.forEach(([k, el]) => { if (el.getBoundingClientRect().top < mid) key = k; });
-    const last = $('#sector-2026');
+    const last = $('#projects');
     if (last && last.getBoundingClientRect().bottom < mid) key = null;
     links.forEach((l) => l.classList.toggle('is-active', !!key && l.dataset.spy === key));
   }

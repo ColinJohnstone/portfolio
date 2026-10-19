@@ -1,4 +1,4 @@
-/* gallery.js — screenshot showcases, phone carousel, lightbox.
+/* gallery.js — screenshot showcases and lightbox.
    Progressive enhancement: with JS off every screenshot is simply stacked on the page. */
 (() => {
   'use strict';
@@ -90,49 +90,6 @@
     screen.addEventListener('pointerleave', () => { hover = false; });
   });
 
-  /* ====================== phone carousel ====================== */
-  let suppressClick = false;
-  $$('[data-carousel]').forEach((c) => {
-    const track = $('.car-track', c);
-    const items = $$('.car-item', track);
-    const dots = $('.car-dots', c);
-    if (!track || !items.length) return;
-    items.forEach((it, i) => dots && dots.appendChild(el('i', i === 0 ? 'on' : '')));
-    const dotEls = dots ? $$('i', dots) : [];
-    const step = () => Math.max(track.clientWidth * 0.8, 240);
-    $('[data-prev]', c).addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduce() ? 'auto' : 'smooth' }));
-    $('[data-next]', c).addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduce() ? 'auto' : 'smooth' }));
-    function paint() {
-      const mid = track.scrollLeft + track.clientWidth / 2;
-      let best = 0, bd = Infinity;
-      items.forEach((it, i) => { const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = i; } });
-      dotEls.forEach((d, i) => d.classList.toggle('on', i === best));
-    }
-    track.addEventListener('scroll', () => requestAnimationFrame(paint), { passive: true });
-    // drag to scroll with a mouse
-    let down = false, sx = 0, sl = 0, moved = 0;
-    track.addEventListener('pointerdown', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      down = true; moved = 0; sx = e.clientX; sl = track.scrollLeft;
-    });
-    addEventListener('pointermove', (e) => {
-      if (!down) return;
-      const dx = e.clientX - sx; moved = Math.max(moved, Math.abs(dx));
-      if (moved > 5) { track.classList.add('is-drag'); track.scrollLeft = sl - dx; }
-    });
-    addEventListener('pointerup', () => {
-      if (!down) return;
-      down = false; track.classList.remove('is-drag');
-      if (moved > 5) { suppressClick = true; setTimeout(() => { suppressClick = false; }, 60); }
-    });
-    // keyboard: arrows scroll
-    track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: step() / 2, behavior: 'smooth' }); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -step() / 2, behavior: 'smooth' }); }
-    });
-    paint();
-  });
-
   /* ====================== lightbox ====================== */
   const lb = $('[data-lightbox]');
   if (!lb) return;
@@ -181,7 +138,6 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
   document.addEventListener('click', (e) => {
-    if (suppressClick) return;
     const item = e.target.closest('[data-lb]');
     if (!item || lb.contains(item)) return;
     const host = item.closest('[data-gallery]');
@@ -199,10 +155,13 @@
       if (host) open(host, active);
     });
   });
-  $$('.car-item[data-lb]').forEach((it) => {
-    it.tabIndex = 0; it.setAttribute('role', 'button'); it.setAttribute('aria-label', 'Enlarge screenshot');
+  $$('.side-main[data-lb]').forEach((it) => {
+    const host = it.closest('[data-gallery]');
+    if (!host) return;
+    it.tabIndex = 0; it.setAttribute('role', 'button');
+    it.setAttribute('aria-label', `View ${$$('[data-lb]', host).length} screenshots of ${host.dataset.gallery}`);
     it.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const host = it.closest('[data-gallery]'); if (host) open(host, it); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(host, it); }
     });
   });
   btnClose.addEventListener('click', close);
