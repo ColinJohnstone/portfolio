@@ -213,10 +213,12 @@
           <li><b>Search</b> competitors, bands, judges and venues, each with a full results history</li>
           <li><b>Standings and records</b> by season and grade, plus all-time wins, streaks and milestones</li>
           <li><b>A 3D globe</b> of contests and venues</li>
+          <li><b>Connections:</b> a map of who competes against whom, with solo players and bands clustered by the contests they share, and the judges who judge them</li>
+          <li><b>Flows:</b> Sankey diagrams of how players and bands move between grades from season to season, and which societies they travel to</li>
           <li><b>Profiles</b> you can claim, follow and correct, and a form to submit missing results</li>
         </ul>
-        <dl class="facts reveal"><div><dd>3,419</dd><dt>competitions</dt></div><div><dd>13,330</dd><dt>competitors</dt></div><div><dd>66,805</dd><dt>results</dt></div><div><dd>1999</dd><dt>data from</dt></div></dl>
-        <p class="label reveal">Built with <b>Next.js 16, React 19, TypeScript, Tailwind 4, Supabase, MapLibre GL</b><br>Totals as shown on the live homepage, October 2026</p>
+        <dl class="facts reveal"><div><dd>3,471</dd><dt>competitions</dt></div><div><dd>13,593</dd><dt>competitors</dt></div><div><dd>258,016</dd><dt>results</dt></div><div><dd>1999</dd><dt>data from</dt></div></dl>
+        <p class="label reveal">Built with <b>Next.js 16, React 19, TypeScript, Tailwind 4, Supabase, MapLibre GL</b><br>Totals counted from the database, November 2026: 190,808 solo and 67,208 band results</p>
         <div class="actions reveal">
           <a class="btn btn-primary" href="https://pipestats.app" target="_blank" rel="noopener">Visit pipestats.app <svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost" href="https://pipestats.app/competitors/johnstone-colin" target="_blank" rel="noopener">My profile <svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -227,10 +229,12 @@
           <div class="device">
             <div class="device-bar"><i></i><i></i><i></i><span class="url"><svg aria-hidden="true"><use href="#i-lock"/></svg>pipestats.app</span></div>
             <div class="device-screen">
-              <figure class="shot is-active" data-lb data-title="Home" data-caption="<b>Home.</b> Search, quick links to every section and live totals."><img src="assets/img/ps-home.webp" width="1440" height="900" alt="Pipe Stats home page with a search bar, quick links to Competitions, Standings, Records, Pipedle and PipeMaster, and live totals." loading="lazy"></figure>
+              <figure class="shot is-active" data-lb data-title="Home" data-caption="<b>Home.</b> Search, and quick links to every section, including Pipedle, Pipenections, PipeMaster, Connections and Flows."><img src="assets/img/ps-home.webp" width="1440" height="900" alt="Pipe Stats home page with a search bar and quick links to Competitions, Standings, Records, Pipedle, Pipenections, PipeMaster, Connections, Flows and more." loading="lazy"></figure>
               <figure class="shot" data-lb data-title="Standings" data-caption="<b>Standings.</b> The 2026 season by grade, across every society."><img src="assets/img/ps-standings.webp" width="1440" height="900" alt="Pipe Stats 2026 standings page showing season leaders for light music, piobaireachd, drumming and pipe bands." loading="lazy"></figure>
               <figure class="shot" data-lb data-title="Records" data-caption="<b>Records and milestones.</b> Most wins, longest streaks, longest careers."><img src="assets/img/ps-records.webp" width="1440" height="900" alt="Pipe Stats records page with cards for most wins and longest winning streak." loading="lazy"></figure>
               <figure class="shot" data-lb data-title="Globe" data-caption="<b>Globe.</b> Every contest and venue, clustered by society."><img src="assets/img/ps-globe.webp" width="1440" height="900" alt="Pipe Stats 3D globe with clusters of contests across North America and the UK." loading="lazy"></figure>
+              <figure class="shot" data-lb data-title="Connections" data-caption="<b>Connections.</b> Solo players as circles, clustered by the contests they share. Switch to bands, add the judges or group by society."><img src="assets/img/ps-connections.webp" width="1440" height="900" alt="Pipe Stats Connections map: thousands of coloured circles in clusters labelled by society and grade, such as EUSPBA Grade 1 and PPBSO Grade 2." loading="lazy"></figure>
+              <figure class="shot" data-lb data-title="Flows" data-caption="<b>Flows.</b> Each column is a season. The bands show where players went next, from grade to grade, with those who joined or stopped."><img src="assets/img/ps-flows.webp" width="1440" height="900" alt="Pipe Stats Flows page: a Sankey diagram of solo players moving between grades from 2021 to 2026, with New and Stopped blocks." loading="lazy"></figure>
             </div>
           </div>
           <div class="tabs" role="tablist" aria-label="Pipe Stats screens"></div>
@@ -242,7 +246,7 @@
     <div style="margin-top:clamp(56px,8vw,104px)">
       <div class="subhead">
         <h3 class="h3 reveal">Inside Pipe Stats</h3>
-        <p class="reveal">Two tools I built into the site. Both run in the browser at the links below.</p>
+        <p class="reveal">Two games and a tool I built into the site. All three run in the browser at the links below.</p>
       </div>
       <div class="sub-grid">
         <article class="sub-card reveal" data-gallery="PipeMaster" id="pipemaster">
@@ -276,6 +280,23 @@
             <p>A daily word puzzle about piping, drumming and the Highland games. You get six guesses and a category hint, and every answer comes with a short explanation, so it teaches the vocabulary as you play. Signed-in players get streaks, stats and a daily leaderboard.</p>
             <div class="actions">
               <a class="btn btn-primary btn-sm" href="https://pipestats.app/pipedle" target="_blank" rel="noopener">Play today’s Pipedle <svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+        </article>
+        <article class="sub-card reveal" style="--d:240" data-gallery="Pipenections" id="pipenections">
+          <div class="device">
+            <div class="device-bar"><i></i><i></i><i></i><span class="url"><svg aria-hidden="true"><use href="#i-lock"/></svg>pipestats.app/pipenections</span></div>
+            <div class="device-screen" data-showcase-mini>
+              <figure class="shot is-active" data-lb data-title="Board" data-caption="<b>Pipenections #4.</b> Sixteen tiles to sort into four groups of four."><img src="assets/img/pn-board.webp" width="1440" height="900" alt="Pipenections board with sixteen word tiles, including SPEYSIDE, UILLEANN, GRIP and WARRANT, and four mistakes remaining." loading="lazy"></figure>
+              <figure class="shot" data-lb data-title="Solved" data-caption="<b>Solved.</b> The four groups run from easiest (yellow) to trickiest (purple), with a streak and stats."><img src="assets/img/pn-solved.webp" width="1440" height="900" alt="A solved Pipenections puzzle: whisky regions, bagpipes of other lands, light music embellishments and hidden Scottish islands, with play statistics underneath." loading="lazy"></figure>
+            </div>
+          </div>
+          <div class="sub-body">
+            <span class="path">pipestats.app/pipenections</span>
+            <h4>Pipenections</h4>
+            <p>A daily puzzle: sort sixteen piping, drumming and Highland games words into four groups of four. The groups run from easiest to trickiest, and four wrong guesses ends the game. Players get streaks, stats and weekly and monthly leaderboards.</p>
+            <div class="actions">
+              <a class="btn btn-primary btn-sm" href="https://pipestats.app/pipenections" target="_blank" rel="noopener">Play today’s Pipenections <svg class="arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </div>
         </article>

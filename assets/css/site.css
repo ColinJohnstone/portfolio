@@ -240,7 +240,7 @@ ul,ol{padding:0;list-style:none}
 /* 14 · sub-projects (inside Pipe Stats) and side projects ------------------------------------------------------------------------------- */
 .subhead{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,5vw,80px);margin-bottom:28px;align-items:end;padding-top:20px;border-top:1px solid var(--ink)}
 .subhead p{color:var(--ink-2);max-width:52ch}
-.sub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3.4vw,48px)}
+.sub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3.4vw,48px)}
 .sub-card{display:grid;gap:22px;align-content:start}
 .sub-body{display:grid;gap:12px;max-width:52ch}
 .sub-body h4{color:var(--ink);font:600 clamp(1.7rem,1.3rem + 1.2vw,2.3rem)/1 var(--font);letter-spacing:-.045em}
@@ -390,6 +390,8 @@ html:not(.js) .bars .track i{width:var(--w)}
   .split .sticky{position:static}
   .split .sticky .h2{max-width:none}
   .section-head,.subhead{grid-template-columns:1fr}
+  .sub-grid{grid-template-columns:1fr}
+  .sub-card{max-width:640px}
 }
 @media (max-width:900px){
   .nav{display:none}
