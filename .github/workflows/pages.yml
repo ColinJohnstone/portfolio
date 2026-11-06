@@ -1,5 +1,9 @@
 # Publishes the site to GitHub Pages. No build step: the repo is the site.
 # One-time setup: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+#
+# To retry a failed deploy, use Actions -> Deploy to GitHub Pages -> Run workflow (or push).
+# Re-running a failed job also works: each attempt uploads an artifact with its own name,
+# so the deploy step never finds two artifacts called "github-pages" in one run.
 name: Deploy to GitHub Pages
 
 on:
@@ -23,15 +27,22 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Assemble site
         run: |
           mkdir _site
           cp -r index.html 404.html about assets _site/
-          touch _site/.nojekyll
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Name the artifact
+        id: artifact
+        run: |
+          if [ "$GITHUB_RUN_ATTEMPT" = "1" ]; then name=github-pages; else name="github-pages-$GITHUB_RUN_ATTEMPT"; fi
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+          name: ${{ steps.artifact.outputs.name }}
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ steps.artifact.outputs.name }}
