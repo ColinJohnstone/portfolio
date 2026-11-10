@@ -460,3 +460,8 @@ html:not(.js) .bars .track i{width:var(--w)}
 
 /* about: slightly smaller page title than the home hero */
 .about-hero .display{font-size:clamp(3.4rem,10.5vw,9.5rem)}
+
+/* phone overlays on the Pipe Stats showcase and its tool cards */
+.stage{position:relative}
+.stage>.side-phone{right:3%;bottom:-10%}
+.sub-card .stage>.side-phone{width:clamp(52px,17%,92px);right:4%;bottom:-8%}
