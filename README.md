@@ -34,7 +34,7 @@ Everything is plain HTML. Pipe Stats is the `<article class="project">` in `inde
 
 ## About the screenshots
 
-- **Pipe Stats, PipeMaster, Pipedle, Pipenections, Connections, Flows, Phish or Legit?, SecTor 2026, CISSP Cram Kit**: captured from the live sites or from their source run locally (Pipe Stats pages, because the live site was behind a bot check).
+- **Pipe Stats, PipeMaster, Pipedle, Pipenections, Connections, Flows, Phish or Legit?, SecTor 2026, CISSPrep**: captured from the live sites or from their source run locally (Pipe Stats pages, because the live site was behind a bot check).
 - **Fuel Quest and Training Dashboard** are private. Their screenshots come from the real, unmodified apps running locally on generated demo data (a "Demo Athlete"), never from personal logs. The pages say so.
 
 The social preview image (`assets/og.png`) is 1200 × 630.
